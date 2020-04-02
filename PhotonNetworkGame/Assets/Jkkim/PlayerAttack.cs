@@ -25,7 +25,7 @@ public class PlayerAttack : Photon.MonoBehaviour, IPunObservable
     void Attack()
     {
         CommonDebug.Log("Attack!!");
-        string callRpcMethodName = "OnAttack";
+        string callRpcMethodName = "OnAttacked";
         _photonView.RPC(callRpcMethodName, PhotonTargets.Others);
     }
 
