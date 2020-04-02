@@ -62,14 +62,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Jkkim\CommonDebug.cs" />
-    <Compile Include="Assets\Jkkim\GameManager.cs" />
-    <Compile Include="Assets\Jkkim\NetworkManager.cs" />
-    <Compile Include="Assets\Jkkim\PhotonNetworkInit.cs" />
-    <Compile Include="Assets\Jkkim\PlayerAttack.cs" />
-    <Compile Include="Assets\Jkkim\PlayerMove.cs" />
-    <Compile Include="Assets\Jkkim\ResourceLoad.cs" />
-    <Compile Include="Assets\Jkkim\SmoothFollow.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\CommonDebug.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\NetworkManager.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\PhotonNetworkInit.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\Player\PlayerAttack.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\Player\PlayerMove.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\ResourceLoad.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\SmoothFollow.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\UserData\UserInfo.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\Demo2DJumpAndRun.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\JumpAndRunMovement.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\DemoBoxes\ColorPerPlayer.cs" />

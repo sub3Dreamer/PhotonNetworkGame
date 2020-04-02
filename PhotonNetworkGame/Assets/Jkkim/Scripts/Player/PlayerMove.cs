@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PhotonNetworkGame
+namespace PUNGame
 {
-    [RequireComponent(typeof(CharacterController))]
+    /// <summary>
+    /// SendMessage 방식이라 무조건 최상단 오브젝트에 꽃혀있어야함
+    /// </summary>
     public class PlayerMove : MonoBehaviour
     {
         const float DEFAULT_GRAVITY_VALUE = -9.81f;
