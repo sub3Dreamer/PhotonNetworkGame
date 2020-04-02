@@ -35,6 +35,7 @@ MonoBehaviour:
   - Flash
   - InstantiateRpc
   - Marco
+  - OnAttacked
   - PickupItemInit
   - Polo
   - PunPickup
@@ -43,5 +44,4 @@ MonoBehaviour:
   - RequestForPickupItems
   - RequestForPickupTimes
   - TaggedPlayer
-  - OnAttack
   DisableAutoOpenWizard: 1
