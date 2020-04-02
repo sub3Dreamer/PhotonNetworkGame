@@ -86,10 +86,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6653259175769089739}
-  - component: {fileID: 6653259175769089748}
-  - component: {fileID: 6653259175769089738}
   - component: {fileID: 8996116040130366432}
   - component: {fileID: 2078961693879969880}
+  - component: {fileID: 6653259175769089738}
+  - component: {fileID: 6653259175769089748}
+  - component: {fileID: 2009993165695832502}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -112,44 +113,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6653259175769089748
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6653259175769089743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adc8c7bc3e68cc84282f45ff5d6e4762, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterController: {fileID: 6653259175769089738}
-  _photonView: {fileID: 8996116040130366432}
-  _photonTransformView: {fileID: 2078961693879969880}
-  _forwardMoveSpeed: 5
-  _backwardMoveSpeed: 2
-  _strafeMoveSpeed: 3
-  _rotateSpeed: 100
-  _gravityRatio: 1
---- !u!143 &6653259175769089738
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6653259175769089743}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8996116040130366432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,3 +218,53 @@ MonoBehaviour:
     InterpolateOption: 0
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 0
+--- !u!143 &6653259175769089738
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653259175769089743}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6653259175769089748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653259175769089743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc8c7bc3e68cc84282f45ff5d6e4762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _characterController: {fileID: 6653259175769089738}
+  _photonView: {fileID: 8996116040130366432}
+  _photonTransformView: {fileID: 2078961693879969880}
+  _forwardMoveSpeed: 5
+  _backwardMoveSpeed: 2
+  _strafeMoveSpeed: 3
+  _rotateSpeed: 100
+  _gravityRatio: 1
+--- !u!114 &2009993165695832502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6653259175769089743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e263877551d7b854983d34515fc3d555, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

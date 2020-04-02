@@ -12,9 +12,15 @@ public class PlayerAttack : Photon.MonoBehaviour, IPunObservable
     }
     #endregion
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            OnAttack();
+    }
+
     [PunRPC]
     void OnAttack()
     {
-
+        CommonDebug.Log("Attack!!!");
     }
 }
