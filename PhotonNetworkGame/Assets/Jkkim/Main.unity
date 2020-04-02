@@ -380,6 +380,11 @@ PrefabInstance:
       propertyPath: instantiationId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2009993165695832502, guid: a5d4407d0c759ec4497501a9df8fdfe7,
+        type: 3}
+      propertyPath: _photonView
+      value: 
+      objectReference: {fileID: 1781818854}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5d4407d0c759ec4497501a9df8fdfe7, type: 3}
 --- !u!4 &468227447 stripped
@@ -694,7 +699,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1582264039}
-  m_LocalRotation: {x: 0.26322693, y: 2.2172793e-10, z: -8.126388e-10, w: 0.96473396}
+  m_LocalRotation: {x: 0.26322693, y: 2.2172791e-10, z: -8.126388e-10, w: 0.96473396}
   m_LocalPosition: {x: 0, y: 12.09, z: -15.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -740,6 +745,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamActivatedEvent, Cinemachine, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &1781818854 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8996116040130366432, guid: a5d4407d0c759ec4497501a9df8fdfe7,
+    type: 3}
+  m_PrefabInstance: {fileID: 468227446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1881798455
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,7 +864,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136463329}
-  m_LocalRotation: {x: 0.26322693, y: 2.2172793e-10, z: -8.126388e-10, w: 0.96473396}
+  m_LocalRotation: {x: 0.26322693, y: 2.2172791e-10, z: -8.126388e-10, w: 0.96473396}
   m_LocalPosition: {x: 0, y: 12.09, z: -15.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

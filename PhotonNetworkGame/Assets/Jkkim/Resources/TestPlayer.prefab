@@ -136,8 +136,8 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 6653259175769089739}
   ObservedComponentsFoldoutOpen: 1
-  viewIdField: 0
-  instantiationId: -1
+  viewIdField: 1
+  instantiationId: 1
   currentMasterID: -1
   isRuntimeInstantiated: 0
 --- !u!114 &2078961693879969880
@@ -268,3 +268,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e263877551d7b854983d34515fc3d555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _photonView: {fileID: 8996116040130366432}
