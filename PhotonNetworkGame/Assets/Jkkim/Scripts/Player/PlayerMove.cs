@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using Cinemachine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace PUNGame
 {
@@ -15,26 +17,24 @@ namespace PUNGame
         [SerializeField] PhotonView _photonView;
         [SerializeField] PhotonTransformView _photonTransformView;
 
-        // 필요 없게될경우 프로퍼티 제거
-        public PhotonView PhotonView
-        {
-            get
-            {
-                return _photonView;
-            }
-        }
-
         [Header("[이동/회전 속도]")]
         [SerializeField] float _forwardMoveSpeed = 5f;      // 전진 이동 속도
         [SerializeField] float _backwardMoveSpeed = 2f;     // 후진 이동 속도
         [SerializeField] float _strafeMoveSpeed = 3f;       // 좌우 이동 속도
-        [SerializeField] float _rotateSpeed = 100f;         // 회전 속도
+        [SerializeField] float _rotateSpeed = 50f;         // 회전 속도
 
         [Header("[중력 배율]")]
         [SerializeField] float _gravityRatio = 1f;
 
+        [Header("[플레이어 카메라 Offset]")]
+        [SerializeField] float _panSpeed = 0.5f;              // 카메라 회전 속도
+        [SerializeField] float _panOffsetMinY = 0f;
+        [SerializeField] float _panOffsetMaxY = 15f;
+        [SerializeField] float _panOffsetZ = -15f;
+
         Vector3 _currentMovement;
         float _currentTurnSpeed;
+        bool _isMove;
 
         void Update()
         {
@@ -42,8 +42,12 @@ namespace PUNGame
             {
                 ResetSpeedValues();
 
+                // Mouse Input
+                UpdateJoystickMovement();
+                UpdateScreenDrag();
+ 
+                // KeyBoard Input
                 UpdateRotateMovement();
-
                 UpdateForwardMovement();
                 UpdateBackwardMovement();
                 UpdateStrafeMovement();
@@ -60,6 +64,59 @@ namespace PUNGame
         {
             _currentMovement = Vector3.zero;
             _currentTurnSpeed = 0;
+        }
+
+        void UpdateJoystickMovement()
+        {
+            var vertical = GameManager.Instance.JoyStick.Vertical;
+            var horizontal = GameManager.Instance.JoyStick.Horizontal;
+
+            var moveVertical = transform.forward * vertical * (vertical >= 0 ? _forwardMoveSpeed : _backwardMoveSpeed);
+            var moveHorizontal = transform.right * horizontal * _strafeMoveSpeed;
+
+            _currentMovement = moveVertical + moveHorizontal;
+            _isMove = vertical != 0 || horizontal != 0;
+        }
+
+        Vector3 _panOriginPos;
+        void UpdateScreenDrag()
+        {
+            //#if UNITY_ANDROID || UNITY_IOS
+            //#else
+            if (_isMove)
+                return;
+
+            // 이거 빌드했을때 안먹음.
+#if UNITY_EDITOR
+            if (EventSystem.current.IsPointerOverGameObject())
+#else
+            if (EventSystem.current.IsPointerOverGameObject(0))
+#endif
+                return;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                _panOriginPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                Vector3 panPos = Camera.main.ScreenToViewportPoint(Input.mousePosition) - _panOriginPos;   
+
+                // Camera Rotate
+                Vector3 cameraOffsetPos = new Vector3(0f, Mathf.Clamp(GameManager.Instance.PlayerCameraOffset.y - panPos.y * _panSpeed, _panOffsetMinY, _panOffsetMaxY), _panOffsetZ);
+                GameManager.Instance.PlayerCameraOffset = cameraOffsetPos;
+
+                // Player Rotate
+                _currentTurnSpeed = panPos.x < 0 ? -_rotateSpeed : _rotateSpeed;
+                transform.Rotate(0.0f, _currentTurnSpeed * Time.deltaTime, 0.0f);
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                
+            }
+//#endif
         }
 
         void UpdateRotateMovement()
@@ -121,6 +178,6 @@ namespace PUNGame
         {
             _photonTransformView.SetSynchronizedValues(_currentMovement, _currentTurnSpeed);
         }
-        #endregion
+#endregion
     }
 }

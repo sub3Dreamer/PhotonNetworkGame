@@ -62,16 +62,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Jkkim\Scripts\AutoDestroyObject.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\Billboard.cs" />
     <Compile Include="Assets\Jkkim\Scripts\CommonDebug.cs" />
     <Compile Include="Assets\Jkkim\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\HpGauge.cs" />
     <Compile Include="Assets\Jkkim\Scripts\NetworkManager.cs" />
     <Compile Include="Assets\Jkkim\Scripts\PhotonNetworkInit.cs" />
     <Compile Include="Assets\Jkkim\Scripts\Player\Player.cs" />
     <Compile Include="Assets\Jkkim\Scripts\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Jkkim\Scripts\Player\PlayerMove.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\Player\PlayerStat.cs" />
+    <Compile Include="Assets\Jkkim\Scripts\Player\PlayerUIController.cs" />
     <Compile Include="Assets\Jkkim\Scripts\ResourceLoad.cs" />
     <Compile Include="Assets\Jkkim\Scripts\SmoothFollow.cs" />
     <Compile Include="Assets\Jkkim\Scripts\UserData\UserInfo.cs" />
+    <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
+    <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
+    <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\Demo2DJumpAndRun.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\Demo2DJumpAndRunWithPhysics\Scripts\JumpAndRunMovement.cs" />
     <Compile Include="Assets\Photon Unity Networking\Demos\DemoBoxes\ColorPerPlayer.cs" />

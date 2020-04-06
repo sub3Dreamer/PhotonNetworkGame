@@ -8,9 +8,9 @@ namespace PUNGame
     public class GameManager : MonoBehaviour
     {
         const string PLAYER_RESOURCE_NAME = "TestPlayer";
-
-        //[SerializeField] SmoothFollow _playerCamera;
+        
         [SerializeField] CinemachineVirtualCamera _playerCamera;
+        [SerializeField] Joystick _joystick;
 
         [Header("[UserInfo(Temp)]")]
         public string _userNickName;
@@ -21,7 +21,9 @@ namespace PUNGame
         public Vector3 SpawnPosition = new Vector3(0f, 3f, 0f);
 
         static GameManager _instance;
+        Player _player;
 
+        #region Property
         public static GameManager Instance
         {
             get
@@ -29,6 +31,44 @@ namespace PUNGame
                 return _instance;
             }
         }
+
+        public Player Player
+        {
+            get
+            {
+                return _player;
+            }
+        }
+
+        public CinemachineVirtualCamera PlayerCamera
+        {
+            get
+            {
+                return _playerCamera;
+            }
+        }
+
+        public Vector3 PlayerCameraOffset
+        {
+            get
+            {
+                return _playerCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
+            }
+            set
+            {
+                _playerCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = value;
+            }
+        }
+
+        // 씬 전환시 Null이 될수있으므로 추가적으로 처리가 필요함
+        public Joystick JoyStick
+        {
+            get
+            {
+                return _joystick;
+            }
+        }
+        #endregion
 
         void Awake()
         {
@@ -64,7 +104,13 @@ namespace PUNGame
             UserInfo.Hp = _userHp;
             UserInfo.AttackDamage = _userAttackDamage;
 
-            //_playerCamera.target = player.transform;
+            player.SetActive(true);
+            
+            _player = player.GetComponent<Player>();
+
+            // Player.Init()과 싱크 맞춰야함.. 실행순서 똑바로
+            // _player.Init();
+            PlayerUIController.Instance.Init();
         }
     }
 }
