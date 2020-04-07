@@ -60,7 +60,7 @@ namespace PUNGame
                     // 공격 데미지
                     var attackDamage = player.Stat.AttackDamage;
 
-                    photonView.RPC("AttackRPC", PhotonTargets.Others, photonViewID, attackUser, attackedUser, attackDamage);
+                    photonView.RPC("AttackRPC", PhotonTargets.All, photonViewID, attackUser, attackedUser, attackDamage);
                 }
             }
         }
@@ -69,6 +69,7 @@ namespace PUNGame
         [PunRPC]
         void AttackRPC(int photonViewID, string attackUser, string attackedUser, int attackDamage)
         {
+            CommonDebug.Log("AttackRPC!");
             if (photonView.viewID == photonViewID)
             {
                 CommonDebug.Log($"{attackUser}가 {attackedUser}에게 {attackDamage}의 피해를 입혔습니다.");
