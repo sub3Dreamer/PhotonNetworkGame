@@ -559,7 +559,7 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 3
+    InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 1
     InterpolateMoveTowardsAcceleration: 2
@@ -687,7 +687,7 @@ MonoBehaviour:
   _forwardMoveSpeed: 5
   _backwardMoveSpeed: 2
   _strafeMoveSpeed: 3
-  _rotateSpeed: 30
+  _rotateSpeed: 100
   _gravityRatio: 1
   _panSpeed: 0.5
   _panOffsetMinY: 0
@@ -710,3 +710,4 @@ MonoBehaviour:
     CurrentHp: 0
     MaxHp: 0
     AttackDamage: 0
+  _testNickName: 

@@ -8,6 +8,8 @@ namespace PUNGame
     {
         [SerializeField] PlayerData _data;
 
+        public string _testNickName;
+
         #region Property
         public PlayerData Data
         {
@@ -66,12 +68,15 @@ namespace PUNGame
         }
 
         #region RPC
+
+        // 이미 접속해있던 애는 데이터 세팅이 안되는 문제가 있음 ㅠㅠ
         [PunRPC]
         void SetDataRPC(int photonViewID, string nickName)
         {
             if(photonView.viewID == photonViewID)
             {
                 _data.NickName = nickName;
+                _testNickName = nickName;
             }
         }
 

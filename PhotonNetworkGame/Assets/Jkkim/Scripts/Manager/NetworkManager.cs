@@ -9,16 +9,32 @@ namespace PUNGame
     /// </summary>
     public class NetworkManager : Photon.PunBehaviour
     {
-        #region Call RPC Method Name
-        readonly string CREATE_PLAYER_RPC = "OnCreatePlayerRPC";
-        #endregion
+        const string VERSION = "v1.0";
 
         public static void Init()
         {
-            PhotonNetworkInit.Init();
+            PhotonNetwork.ConnectUsingSettings(VERSION);
         }
 
         #region Override Method
+        public override void OnConnectedToMaster()
+        {
+            CommonDebug.Log("NetworkManager >> OnConnectedToMaster : 랜덤 방에 접속을 시도합니다.");
+            PhotonNetwork.JoinRandomRoom();
+        }
+
+        public override void OnJoinedLobby()
+        {
+            CommonDebug.Log("NetworkManager >> OnJoinedLobby : 랜덤 방에 접속을 시도합니다.");
+            PhotonNetwork.JoinRandomRoom();
+        }
+
+        public override void OnPhotonRandomJoinFailed(object[] codeAndMsg)
+        {
+            CommonDebug.Log("NetworkManager >> OnPhotonRandomJoinFailed : 새로운 방을 생성합니다.");
+            PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = 4 }, null);
+        }
+
         public override void OnJoinedRoom()
         {
             base.OnJoinedRoom();
@@ -40,15 +56,6 @@ namespace PUNGame
         {
             base.OnConnectionFail(cause);
             CommonDebug.LogError("NetworkManager >> OnConnectionFail");
-            PhotonNetworkInit.Init();
-        }
-        #endregion
-
-        #region RPC Event
-        [PunRPC]
-        void OnCreatePlayerRPC(string photonViewID, PlayerData playerData)
-        {
-
         }
         #endregion
     }

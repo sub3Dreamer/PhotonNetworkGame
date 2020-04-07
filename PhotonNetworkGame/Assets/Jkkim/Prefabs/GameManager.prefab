@@ -44,12 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66e6b9950f3dec94b9088e100bf9b511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerCamera: {fileID: 0}
-  _joystick: {fileID: 0}
-  _userNickName: "\uC720\uC800"
-  _userHp: 50
-  _userAttackDamage: 5
-  SpawnPosition: {x: 0, y: 3, z: 0}
 --- !u!1 &9068008644064759316
 GameObject:
   m_ObjectHideFlags: 0
@@ -60,7 +54,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9068008644064759317}
   - component: {fileID: 9068008644064759318}
-  - component: {fileID: 9068008644064759319}
   m_Layer: 0
   m_Name: Photon Network
   m_TagString: Untagged
@@ -92,17 +85,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 994a00f1993ba5f4c97fe4e34c96ac7a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9068008644064759319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9068008644064759316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19b47ee8dd7975d4eb9ae589a7d97437, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

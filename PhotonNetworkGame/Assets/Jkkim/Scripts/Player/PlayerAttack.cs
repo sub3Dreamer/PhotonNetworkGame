@@ -46,15 +46,19 @@ namespace PUNGame
                 {
                     // 공격 당한 유저의 네트워크 아이디
                     int photonViewID = otherPlayer.photonView.viewID;
+                    var player = StageScene.Instance.Player;
+
+                    if (player.photonView.viewID == photonViewID)
+                        continue;
 
                     // 공격한 유저(나)
-                    var attackUser = StageScene.Instance.Player.Stat.NickName;
+                    var attackUser = player.Stat.NickName;
 
                     // 공격 당한 유저
                     var attackedUser = otherPlayer.Stat.NickName;
 
                     // 공격 데미지
-                    var attackDamage = StageScene.Instance.Player.Stat.AttackDamage;
+                    var attackDamage = player.Stat.AttackDamage;
 
                     photonView.RPC("AttackRPC", PhotonTargets.Others, photonViewID, attackUser, attackedUser, attackDamage);
                 }
