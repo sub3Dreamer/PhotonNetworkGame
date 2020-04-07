@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Jkkim/Main.unity
+    path: Assets/Jkkim/Login.unity
+    guid: 37413e9a71b1c4c4e8a0ebb25cf32fc9
+  - enabled: 1
+    path: Assets/Jkkim/Stage.unity
     guid: eff7277a6ac52354e84dc126c494238f
   m_configObjects: {}

@@ -4,30 +4,48 @@ using UnityEngine;
 
 namespace PUNGame
 {
-    public class PlayerStat : MonoBehaviour
+    public class PlayerStat : Photon.MonoBehaviour
     {
-        [SerializeField] string _nickName;
-        [SerializeField] int _hp;
-        [SerializeField] int _attackDamage;
+        [SerializeField] PlayerData _data;
 
         #region Property
+        public PlayerData Data
+        {
+            get
+            {
+                return _data;
+            }
+        }
+
         public string NickName
         {
             get
             {
-                return _nickName;
+                return _data.NickName;
             }
         }
 
-        public int Hp
+        public int MaxHp
         {
             get
             {
-                return _hp;
+                return _data.MaxHp;
             }
             set
             {
-                _hp = value;
+                _data.MaxHp = value;
+            }
+        }
+
+        public int CurrentHp
+        {
+            get
+            {
+                return _data.CurrentHp;
+            }
+            set
+            {
+                _data.CurrentHp = value;
             }
         }
 
@@ -35,16 +53,28 @@ namespace PUNGame
         {
             get
             {
-                return _attackDamage;
+                return _data.AttackDamage;
             }
         }
         #endregion
 
-        public void SetData(string nickName, int hp, int attackDamage)
+        public void SetData(PlayerData playerData)
         {
-            _nickName = nickName;
-            _hp = hp;
-            _attackDamage = attackDamage;
+            _data = playerData;
+
+            photonView.RPC("SetDataRPC", PhotonTargets.Others, photonView.viewID, playerData.NickName);
         }
+
+        #region RPC
+        [PunRPC]
+        void SetDataRPC(int photonViewID, string nickName)
+        {
+            if(photonView.viewID == photonViewID)
+            {
+                _data.NickName = nickName;
+            }
+        }
+
+        #endregion
     }
 }

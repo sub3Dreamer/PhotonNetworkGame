@@ -197,6 +197,7 @@ GameObject:
   - component: {fileID: 1818649382}
   - component: {fileID: 1818649384}
   - component: {fileID: 1818649383}
+  - component: {fileID: 2799950767486148138}
   m_Layer: 5
   m_Name: HpGauge
   m_TagString: Untagged
@@ -261,6 +262,21 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &2799950767486148138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818649381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7251470715d7f47a2da93592dbf7de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _fillAmountRect: {fileID: 35707689}
+  _fillAmountMaxWidth: 250
+  _fillAmountHeight: 20
 --- !u!1 &202302281945432359
 GameObject:
   m_ObjectHideFlags: 0
@@ -638,7 +654,7 @@ MonoBehaviour:
   _stat: {fileID: 202302282662868540}
   _moveControl: {fileID: 9128269745018504485}
   _attackControl: {fileID: 8210683915179457369}
-  _hpGauge: {fileID: 0}
+  _hpGauge: {fileID: 2799950767486148138}
 --- !u!114 &8210683915179457369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -651,7 +667,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e263877551d7b854983d34515fc3d555, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _photonView: {fileID: 9085492431391844524}
+  _player: {fileID: 6817226229702542720}
   _attackPoint: {fileID: 202302282815156352}
   _attackRange: 2
 --- !u!114 &9128269745018504485
@@ -667,12 +683,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _characterController: {fileID: 6817226229702542721}
-  _photonView: {fileID: 9085492431391844524}
   _photonTransformView: {fileID: 2168285857804077844}
   _forwardMoveSpeed: 5
   _backwardMoveSpeed: 2
   _strafeMoveSpeed: 3
-  _rotateSpeed: 50
+  _rotateSpeed: 30
   _gravityRatio: 1
   _panSpeed: 0.5
   _panOffsetMinY: 0
@@ -690,6 +705,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d45004c67ddc574c931ee376dfda8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nickName: "\uC720\uC800"
-  _hp: 50
-  _attackDamage: 5
+  _data:
+    NickName: 
+    CurrentHp: 0
+    MaxHp: 0
+    AttackDamage: 0

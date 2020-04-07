@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace PUNGame
 {
+    /// <summary>
+    /// NetworkManager랑 꼭 분리시켜야 하는 구조인지 확인이 필요함.
+    /// </summary>
     public class PhotonNetworkInit : Photon.MonoBehaviour
     {
         public static void Init()
@@ -15,19 +18,19 @@ namespace PUNGame
         #region PUN's SendMessage
         public virtual void OnConnectedToMaster()
         {
-            CommonDebug.Log("OnConnectedToMaster >> 랜덤 방에 접속을 시도합니다.");
+            CommonDebug.Log("PhotonNetworkInit >> OnConnectedToMaster : 랜덤 방에 접속을 시도합니다.");
             PhotonNetwork.JoinRandomRoom();
         }
 
         public virtual void OnJoinedLobby()
         {
-            CommonDebug.Log("OnJoinedLobby >> 랜덤 방에 접속을 시도합니다.");
+            CommonDebug.Log("PhotonNetworkInit >> OnJoinedLobby : 랜덤 방에 접속을 시도합니다.");
             PhotonNetwork.JoinRandomRoom();
         }
 
         public virtual void OnPhotonRandomJoinFailed()
         {
-            CommonDebug.Log("OnPhotonRandomJoinFailed >> 새로운 방을 생성합니다.");
+            CommonDebug.Log("PhotonNetworkInit >> OnPhotonRandomJoinFailed : 새로운 방을 생성합니다.");
             PhotonNetwork.CreateRoom(null, new RoomOptions() { MaxPlayers = 4 }, null);
         }
 
@@ -35,12 +38,12 @@ namespace PUNGame
 
         public virtual void OnFailedToConnectToPhoton(DisconnectCause cause)
         {
-            CommonDebug.LogError("OnFailedToConnectToPhoton >> Cause: " + cause);
+            CommonDebug.LogError("PhotonNetworkInit >> OnFailedToConnectToPhoton : Cause: " + cause);
         }
 
         public void OnJoinedRoom()
         {
-            CommonDebug.Log("OnJoinedRoom");
+            CommonDebug.Log("PhotonNetworkInit >> OnJoinedRoom");
         }
         #endregion
     }

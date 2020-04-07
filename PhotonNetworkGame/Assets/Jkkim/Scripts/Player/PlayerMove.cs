@@ -9,12 +9,11 @@ namespace PUNGame
     /// <summary>
     /// SendMessage 방식이라 무조건 최상단 오브젝트에 꽃혀있어야함
     /// </summary>
-    public class PlayerMove : MonoBehaviour
+    public class PlayerMove : Photon.MonoBehaviour
     {
         const float DEFAULT_GRAVITY_VALUE = -9.81f;
 
         [SerializeField] CharacterController _characterController;
-        [SerializeField] PhotonView _photonView;
         [SerializeField] PhotonTransformView _photonTransformView;
 
         [Header("[이동/회전 속도]")]
@@ -38,23 +37,23 @@ namespace PUNGame
 
         void Update()
         {
-            if (_photonView.isMine)
+            if (photonView.isMine)
             {
                 ResetSpeedValues();
 
                 // Mouse Input
                 UpdateJoystickMovement();
                 UpdateScreenDrag();
- 
+
                 // KeyBoard Input
                 UpdateRotateMovement();
                 UpdateForwardMovement();
                 UpdateBackwardMovement();
                 UpdateStrafeMovement();
 
+                // Move Apply
                 MoveCharacterController();
                 ApplyGravityToCharacterController();
-
                 ApplySynchronizedValues();
             }
         }
@@ -68,8 +67,8 @@ namespace PUNGame
 
         void UpdateJoystickMovement()
         {
-            var vertical = GameManager.Instance.JoyStick.Vertical;
-            var horizontal = GameManager.Instance.JoyStick.Horizontal;
+            var vertical = StageScene.Instance.JoyStick.Vertical;
+            var horizontal = StageScene.Instance.JoyStick.Horizontal;
 
             var moveVertical = transform.forward * vertical * (vertical >= 0 ? _forwardMoveSpeed : _backwardMoveSpeed);
             var moveHorizontal = transform.right * horizontal * _strafeMoveSpeed;
@@ -81,12 +80,9 @@ namespace PUNGame
         Vector3 _panOriginPos;
         void UpdateScreenDrag()
         {
-            //#if UNITY_ANDROID || UNITY_IOS
-            //#else
             if (_isMove)
                 return;
 
-            // 이거 빌드했을때 안먹음.
 #if UNITY_EDITOR
             if (EventSystem.current.IsPointerOverGameObject())
 #else
@@ -101,22 +97,26 @@ namespace PUNGame
 
             if (Input.GetMouseButton(0))
             {
-                Vector3 panPos = Camera.main.ScreenToViewportPoint(Input.mousePosition) - _panOriginPos;   
+                Vector3 panPos = Camera.main.ScreenToViewportPoint(Input.mousePosition) - _panOriginPos;
 
-                // Camera Rotate
-                Vector3 cameraOffsetPos = new Vector3(0f, Mathf.Clamp(GameManager.Instance.PlayerCameraOffset.y - panPos.y * _panSpeed, _panOffsetMinY, _panOffsetMaxY), _panOffsetZ);
-                GameManager.Instance.PlayerCameraOffset = cameraOffsetPos;
-
-                // Player Rotate
-                _currentTurnSpeed = panPos.x < 0 ? -_rotateSpeed : _rotateSpeed;
-                transform.Rotate(0.0f, _currentTurnSpeed * Time.deltaTime, 0.0f);
+                if (Mathf.Abs(panPos.y) >= Mathf.Abs(panPos.x))
+                {
+                    // Camera Rotate
+                    Vector3 cameraOffsetPos = new Vector3(0f, Mathf.Clamp(StageScene.Instance.PlayerCameraOffset.y - panPos.y * _panSpeed, _panOffsetMinY, _panOffsetMaxY), _panOffsetZ);
+                    StageScene.Instance.PlayerCameraOffset = cameraOffsetPos;
+                }
+                else
+                {
+                    // Player Rotate
+                    _currentTurnSpeed = panPos.x < 0 ? -_rotateSpeed : _rotateSpeed;
+                    transform.Rotate(0.0f, _currentTurnSpeed * Time.deltaTime, 0.0f);
+                }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
                 
             }
-//#endif
         }
 
         void UpdateRotateMovement()
@@ -178,6 +178,6 @@ namespace PUNGame
         {
             _photonTransformView.SetSynchronizedValues(_currentMovement, _currentTurnSpeed);
         }
-#endregion
+        #endregion
     }
 }

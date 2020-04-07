@@ -45,4 +45,7 @@ MonoBehaviour:
   - RequestForPickupTimes
   - TaggedPlayer
   - OnAttackedRPC
+  - OnCreatePlayerRPC
+  - AttackRPC
+  - SetDataRPC
   DisableAutoOpenWizard: 1

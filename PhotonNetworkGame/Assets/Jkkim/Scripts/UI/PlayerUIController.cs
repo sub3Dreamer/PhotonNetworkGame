@@ -7,11 +7,13 @@ namespace PUNGame
 {
     public class PlayerUIController : MonoBehaviour
     {
+        [SerializeField] Joystick _joystick;
         [SerializeField] Text _txtNickName;
         [SerializeField] HpGauge _hpGauge;
 
         static PlayerUIController _instance;
 
+        #region Property
         public static PlayerUIController Instance
         {
             get
@@ -20,6 +22,15 @@ namespace PUNGame
             }
         }
 
+        public Joystick Joystick
+        {
+            get
+            {
+                return _joystick;
+            }
+        }
+        #endregion
+
         void Awake()
         {
             _instance = this;
@@ -27,7 +38,7 @@ namespace PUNGame
 
         public void Init()
         {
-            _txtNickName.text = GameManager.Instance.Player.Stat.NickName;
+            _txtNickName.text = StageScene.Instance.Player.Stat.NickName;
         }
 
         public void SetHp(int currentHp, int maxHp)
@@ -38,7 +49,7 @@ namespace PUNGame
         #region Button Event
         public void OnClickAttack()
         {
-            GameManager.Instance.Player.OnAttack();
+            StageScene.Instance.Player.OnAttack();
         }
         #endregion
     }

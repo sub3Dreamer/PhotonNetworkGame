@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PUNGame
 {
     [RequireComponent(typeof(PhotonView), typeof(CharacterController))]
-    public class Player : MonoBehaviour
+    public class Player : Photon.MonoBehaviour
     {
         [SerializeField] PlayerStat _stat;
         [SerializeField] PlayerMove _moveControl;
@@ -16,6 +16,7 @@ namespace PUNGame
 
         PhotonPlayer _photonPlayer;
 
+        #region Property
         public PlayerStat Stat
         {
             get
@@ -23,20 +24,18 @@ namespace PUNGame
                 return _stat;
             }
         }
+        #endregion
 
-        // 순서 처리 제대로 잡아야함..
-        private void Start()
-        {
-            Init();
-        }
-
-        public void Init()
+        #region Public Method
+        public void Init(PlayerData playerData)
         {
             _photonPlayer = PhotonNetwork.player;
-            Debug.Log("Init");
+            _stat.SetData(playerData);
+            Debug.Log("Player >> Init");
+
+            _hpGauge.gameObject.SetActive(!photonView.isMine);
         }
-        
-        #region Public Method
+
         public void OnAttack()
         {
             _attackControl.OnAttack();
@@ -47,5 +46,7 @@ namespace PUNGame
             _hpGauge.SetGauge(currentHp, maxHp);
         }
         #endregion
+
+        
     }
 }

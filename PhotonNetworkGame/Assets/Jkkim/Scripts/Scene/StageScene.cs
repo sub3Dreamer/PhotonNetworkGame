@@ -1,30 +1,27 @@
-﻿using Cinemachine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 namespace PUNGame
 {
-    public class GameManager : MonoBehaviour
+    public class StageScene : MonoBehaviour
     {
         const string PLAYER_RESOURCE_NAME = "TestPlayer";
-        
-        [SerializeField] CinemachineVirtualCamera _playerCamera;
-        [SerializeField] Joystick _joystick;
 
-        [Header("[UserInfo(Temp)]")]
-        public string _userNickName;
-        public int _userHp;
-        public int _userAttackDamage;
+        CinemachineVirtualCamera _playerCamera;
+        Joystick _joystick;
 
-        // 나중에 구조화
+        // 나중에 구조화(맵별로 포지션 다르게 가져오는 처리도 해야함)
         public Vector3 SpawnPosition = new Vector3(0f, 3f, 0f);
-
-        static GameManager _instance;
+        
+        static StageScene _instance;
         Player _player;
 
+        Dictionary<int, Player> _otherPlayerDic = new Dictionary<int, Player>();
+
         #region Property
-        public static GameManager Instance
+        public static StageScene Instance
         {
             get
             {
@@ -70,25 +67,21 @@ namespace PUNGame
         }
         #endregion
 
-        void Awake()
+        private void Awake()
         {
-            if (_instance == null)
-            {
-                _instance = this;
-                DontDestroyOnLoad(this.gameObject);
-            }
-            else
-            {
-                DestroyImmediate(this.gameObject);
-                return;
-            }
-
-            Init();
+            _instance = this;
         }
 
-        void Init()
+        private void OnDestroy()
         {
-            NetworkManager.Init();
+            _otherPlayerDic.Clear();
+        }
+
+        #region Public Method
+        public void Init()
+        {
+            _playerCamera = StageCameraController.Instance.PlayerCamera;
+            _joystick = PlayerUIController.Instance.Joystick;
         }
 
         public void CreatePlayer()
@@ -100,17 +93,39 @@ namespace PUNGame
             _playerCamera.Follow = player.transform;
             _playerCamera.LookAt = player.transform;
 
-            UserInfo.NickName = _userNickName;
-            UserInfo.Hp = _userHp;
-            UserInfo.AttackDamage = _userAttackDamage;
-
             player.SetActive(true);
-            
-            _player = player.GetComponent<Player>();
 
-            // Player.Init()과 싱크 맞춰야함.. 실행순서 똑바로
-            // _player.Init();
+            _player = player.GetComponent<Player>();
+            _player.Init(GameManager.Instance.LoginData.PlayerData);
+
             PlayerUIController.Instance.Init();
         }
+
+        public void AddOtherPlayer(int photonViewID, Player player)
+        {
+            if(_otherPlayerDic.ContainsKey(photonViewID))
+            {
+                _otherPlayerDic[photonViewID] = player;
+            }
+            else
+            {
+                _otherPlayerDic.Add(photonViewID, player);
+            }
+        }
+
+        public void RemoveOtherPlayer(int photonViewID)
+        {
+            if (_otherPlayerDic.ContainsKey(photonViewID))
+                _otherPlayerDic.Remove(photonViewID);
+        }
+
+        public Player GetOtherPlayer(int photonViewID)
+        {
+            if (_otherPlayerDic.ContainsKey(photonViewID))
+                return _otherPlayerDic[photonViewID];
+
+            return null;
+        }
+        #endregion
     }
 }
