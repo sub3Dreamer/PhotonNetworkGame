@@ -17,12 +17,6 @@ namespace PUNGame
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                     Attack();
-
-                if(Input.GetKeyDown(KeyCode.L))
-                {
-                    CommonDebug.Log(_player.Stat.NickName);
-                }
-
             }
         }
 
@@ -48,7 +42,7 @@ namespace PUNGame
                     int photonViewID = otherPlayer.photonView.viewID;
                     var player = StageScene.Instance.Player;
 
-                    if (player.photonView.viewID == photonViewID)
+                    if (photonViewID == photonView.viewID)
                         continue;
 
                     // 공격한 유저(나)
@@ -60,7 +54,8 @@ namespace PUNGame
                     // 공격 데미지
                     var attackDamage = player.Stat.AttackDamage;
 
-                    photonView.RPC("AttackRPC", PhotonTargets.All, photonViewID, attackUser, attackedUser, attackDamage);
+                    // 와나.. 이거를 착각해서 개삽질했네..
+                    otherPlayer.photonView.RPC("AttackRPC", PhotonTargets.Others, photonViewID, attackUser, attackedUser, attackDamage);
                 }
             }
         }
@@ -69,10 +64,9 @@ namespace PUNGame
         [PunRPC]
         void AttackRPC(int photonViewID, string attackUser, string attackedUser, int attackDamage)
         {
-            CommonDebug.Log("AttackRPC!");
             if (photonView.viewID == photonViewID)
             {
-                CommonDebug.Log($"{attackUser}가 {attackedUser}에게 {attackDamage}의 피해를 입혔습니다.");
+                CommonDebug.Log($"AttackRPC!! {attackUser}가 {attackedUser}에게 {attackDamage}의 피해를 입혔습니다.");
             }
         }
         #endregion
