@@ -4,11 +4,9 @@ using UnityEngine;
 
 namespace PUNGame
 {
-    public class PlayerStat : Photon.MonoBehaviour
+    public class PlayerStat : Photon.MonoBehaviour, IPunObservable
     {
         [SerializeField] PlayerData _data;
-
-        public string _testNickName;
 
         #region Property
         public PlayerData Data
@@ -60,26 +58,37 @@ namespace PUNGame
         }
         #endregion
 
-        public void SetData(PlayerData playerData)
+        #region Interface Override
+
+        // PlayerData를 포톤 네트워크에 실시간으로 동기화
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
-            _data = playerData;
-
-            photonView.RPC("SetDataRPC", PhotonTargets.Others, photonView.viewID, playerData.NickName);
-        }
-
-        #region RPC
-
-        // 이미 접속해있던 애는 데이터 세팅이 안되는 문제가 있음 ㅠㅠ
-        [PunRPC]
-        void SetDataRPC(int photonViewID, string nickName)
-        {
-            if(photonView.viewID == photonViewID)
+            if (stream.isWriting)
             {
-                _data.NickName = nickName;
-                _testNickName = nickName;
+                // Class타입은 Serialize가 안됨
+                //stream.SendNext(_data);
+
+                stream.SendNext(_data.NickName);
+                stream.SendNext(_data.CurrentHp);
+                stream.SendNext(_data.MaxHp);
+                stream.SendNext(_data.AttackDamage);
+            }
+            else
+            {
+                //_data = (PlayerData)stream.ReceiveNext();
+
+                _data.NickName = (string)stream.ReceiveNext();
+                _data.CurrentHp = (int)stream.ReceiveNext();
+                _data.MaxHp = (int)stream.ReceiveNext();
+                _data.AttackDamage = (int)stream.ReceiveNext();
             }
         }
 
         #endregion
+
+        public void SetData(PlayerData playerData)
+        {
+            _data = playerData;
+        }
     }
 }

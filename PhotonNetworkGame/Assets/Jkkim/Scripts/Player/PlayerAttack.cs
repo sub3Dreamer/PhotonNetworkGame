@@ -35,39 +35,35 @@ namespace PUNGame
 
             for (int i = 0; i < hitColliders.Length; i++)
             {
-                Player otherPlayer = hitColliders[i].gameObject.GetComponent<Player>();
-                if (otherPlayer != null)
+                Player hitPlayer = hitColliders[i].gameObject.GetComponent<Player>();
+                if (hitPlayer != null)
                 {
-                    // 공격 당한 유저의 네트워크 아이디
-                    int photonViewID = otherPlayer.photonView.viewID;
-                    var player = StageScene.Instance.Player;
-
-                    if (photonViewID == photonView.viewID)
+                    // 충돌체의 viewID가 나일경우 패스  
+                    if (hitPlayer.photonView.viewID == photonView.viewID)
                         continue;
 
+                    var player = StageScene.Instance.Player;
+                    
                     // 공격한 유저(나)
                     var attackUser = player.Stat.NickName;
 
                     // 공격 당한 유저
-                    var attackedUser = otherPlayer.Stat.NickName;
+                    var attackedUser = hitPlayer.Stat.NickName;
 
                     // 공격 데미지
                     var attackDamage = player.Stat.AttackDamage;
 
-                    // 와나.. 이거를 착각해서 개삽질했네..
-                    otherPlayer.photonView.RPC("AttackRPC", PhotonTargets.Others, photonViewID, attackUser, attackedUser, attackDamage);
+                    // 피격 유저에게 RPC를 전송함
+                    hitPlayer.photonView.RPC("AttackRPC", PhotonTargets.Others, attackUser, attackedUser, attackDamage);
                 }
             }
         }
 
         #region RPC
         [PunRPC]
-        void AttackRPC(int photonViewID, string attackUser, string attackedUser, int attackDamage)
+        void AttackRPC(string attackUser, string attackedUser, int attackDamage)
         {
-            if (photonView.viewID == photonViewID)
-            {
-                CommonDebug.Log($"AttackRPC!! {attackUser}가 {attackedUser}에게 {attackDamage}의 피해를 입혔습니다.");
-            }
+            CommonDebug.Log($"AttackRPC!! {attackUser}가 {attackedUser}에게 {attackDamage}의 피해를 입혔습니다.");
         }
         #endregion
     }

@@ -14,8 +14,6 @@ namespace PUNGame
         [Header("[Canvas]")]
         [SerializeField] HpGauge _hpGauge;
 
-        PhotonPlayer _photonPlayer;
-
         #region Property
         public PlayerStat Stat
         {
@@ -29,10 +27,7 @@ namespace PUNGame
         #region Public Method
         public void Init(PlayerData playerData)
         {
-            _photonPlayer = PhotonNetwork.player;
             _stat.SetData(playerData);
-            Debug.Log("Player >> Init");
-
             _hpGauge.gameObject.SetActive(!photonView.isMine);
         }
 

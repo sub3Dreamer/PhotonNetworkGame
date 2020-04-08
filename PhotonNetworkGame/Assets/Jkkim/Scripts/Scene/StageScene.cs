@@ -5,7 +5,7 @@ using Cinemachine;
 
 namespace PUNGame
 {
-    public class StageScene : MonoBehaviour
+    public class StageScene : Photon.MonoBehaviour
     {
         const string PLAYER_RESOURCE_NAME = "TestPlayer";
 
@@ -100,7 +100,7 @@ namespace PUNGame
 
             PlayerUIController.Instance.Init();
         }
-
+        
         public void AddOtherPlayer(int photonViewID, Player player)
         {
             if(_otherPlayerDic.ContainsKey(photonViewID))

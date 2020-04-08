@@ -538,6 +538,7 @@ MonoBehaviour:
   ownershipTransfer: 0
   ObservedComponents:
   - {fileID: 6817226229702542727}
+  - {fileID: 202302282662868540}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -710,4 +711,3 @@ MonoBehaviour:
     CurrentHp: 0
     MaxHp: 0
     AttackDamage: 0
-  _testNickName: 
