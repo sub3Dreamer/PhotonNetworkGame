@@ -29,27 +29,31 @@ namespace PUNGame
         // PlayerData를 포톤 네트워크에 실시간으로 동기화
         public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
+            var playerStat = _stat.Data;
+
             if (stream.isWriting)
             {
                 // Class타입은 Serialize가 안됨
                 //stream.SendNext(_data);
 
-                stream.SendNext(_stat.Data.NickName);
-                stream.SendNext(_stat.Data.CurrentHp);
-                stream.SendNext(_stat.Data.MaxHp);
-                stream.SendNext(_stat.Data.AttackDamage);
+                stream.SendNext(playerStat.NickName);
+                stream.SendNext(playerStat.CurrentHp);
+                stream.SendNext(playerStat.MaxHp);
+                stream.SendNext(playerStat.AttackDamage);
+
+                // 내 Hp 게이지 갱신
+                PlayerUIController.Instance.SetHp(playerStat.CurrentHp, playerStat.MaxHp);
             }
             else
             {
                 //_data = (PlayerData)stream.ReceiveNext();
 
-                var playerStat = _stat.Data;
-
                 playerStat.NickName = (string)stream.ReceiveNext();
                 playerStat.CurrentHp = (int)stream.ReceiveNext();
                 playerStat.MaxHp = (int)stream.ReceiveNext();
                 playerStat.AttackDamage = (int)stream.ReceiveNext();
-
+                
+                // 피격 유저 Hp 갱신
                 _hpGauge.SetGauge(playerStat.CurrentHp, playerStat.MaxHp);
             }
         }
