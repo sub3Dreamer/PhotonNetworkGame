@@ -4,9 +4,6 @@ using UnityEngine;
 
 namespace PUNGame
 {
-    /// <summary>
-    /// PhotonNetworkInit이랑 꼭 분리시켜야 하는 구조인지 확인이 필요함.
-    /// </summary>
     public class NetworkManager : Photon.PunBehaviour
     {
         const string VERSION = "v1.0";

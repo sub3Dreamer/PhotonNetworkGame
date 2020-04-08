@@ -27,8 +27,7 @@ namespace PUNGame
         public void OnClickStart()
         {
             CreateData();
-            SceneManager.LoadScene(SceneManager.Scene.Stage);
-            GameManager.Instance.Login(_data);
+            GameManager.Instance.LoadStageScene(_data);
         }
         #endregion
     }

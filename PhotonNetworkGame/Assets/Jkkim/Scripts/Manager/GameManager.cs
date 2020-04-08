@@ -45,10 +45,11 @@ namespace PUNGame
             if (SceneManager.GetActiveScene() != SceneManager.Scene.Login)
                 SceneManager.LoadScene(SceneManager.Scene.Login);
         }
-
-        // Stage Scene
-        public void Login(LoginData loginData)
+       
+        public void LoadStageScene(LoginData loginData)
         {
+            SceneManager.LoadScene(SceneManager.Scene.Stage);
+
             _loginData = loginData;
             NetworkManager.Init();
         }

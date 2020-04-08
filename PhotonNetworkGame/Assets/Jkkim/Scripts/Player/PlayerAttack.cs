@@ -64,6 +64,9 @@ namespace PUNGame
         void AttackRPC(string attackUser, string attackedUser, int attackDamage)
         {
             CommonDebug.Log($"AttackRPC!! {attackUser}가 {attackedUser}에게 {attackDamage}의 피해를 입혔습니다.");
+
+            var playerStat = _player.Stat;
+            playerStat.CurrentHp = Mathf.Clamp(playerStat.CurrentHp - attackDamage, 0, playerStat.MaxHp);
         }
         #endregion
     }

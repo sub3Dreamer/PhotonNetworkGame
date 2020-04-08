@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PUNGame
 {
-    public class PlayerStat : Photon.MonoBehaviour, IPunObservable
+    public class PlayerStat : MonoBehaviour
     {
         [SerializeField] PlayerData _data;
 
@@ -56,34 +56,6 @@ namespace PUNGame
                 return _data.AttackDamage;
             }
         }
-        #endregion
-
-        #region Interface Override
-
-        // PlayerData를 포톤 네트워크에 실시간으로 동기화
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            if (stream.isWriting)
-            {
-                // Class타입은 Serialize가 안됨
-                //stream.SendNext(_data);
-
-                stream.SendNext(_data.NickName);
-                stream.SendNext(_data.CurrentHp);
-                stream.SendNext(_data.MaxHp);
-                stream.SendNext(_data.AttackDamage);
-            }
-            else
-            {
-                //_data = (PlayerData)stream.ReceiveNext();
-
-                _data.NickName = (string)stream.ReceiveNext();
-                _data.CurrentHp = (int)stream.ReceiveNext();
-                _data.MaxHp = (int)stream.ReceiveNext();
-                _data.AttackDamage = (int)stream.ReceiveNext();
-            }
-        }
-
         #endregion
 
         public void SetData(PlayerData playerData)
