@@ -8,7 +8,7 @@ namespace PUNGame
     {
         [SerializeField] Player _player;
 
-        [SerializeField] Transform _attackPoint;
+        [SerializeField] Transform[] _attackPoints;
         [SerializeField] float _attackRange = 2f;
 
         void Update()
@@ -31,31 +31,45 @@ namespace PUNGame
         {
             CommonDebug.Log("Attack!!");
 
-            Collider[] hitColliders = Physics.OverlapSphere(_attackPoint.position, _attackRange);
+            List<Player> hitPlayerList = new List<Player>();
 
-            for (int i = 0; i < hitColliders.Length; i++)
+            for(int i = 0; i < _attackPoints.Length; i++)
             {
-                Player hitPlayer = hitColliders[i].gameObject.GetComponent<Player>();
-                if (hitPlayer != null)
+                var attackPoint = _attackPoints[i];
+
+                Collider[] hitColliders = Physics.OverlapSphere(attackPoint.position, _attackRange);
+
+                for (int j = 0; j < hitColliders.Length; j++)
                 {
-                    // 충돌체의 viewID가 나일경우 패스  
-                    if (hitPlayer.photonView.viewID == photonView.viewID)
-                        continue;
+                    Player hitPlayer = hitColliders[j].gameObject.GetComponent<Player>();
+                    if (hitPlayer != null)
+                    {
+                        // 충돌체의 viewID가 나일경우 패스  
+                        if (hitPlayer.photonView.viewID == photonView.viewID)
+                            continue;
 
-                    var player = StageScene.Instance.Player;
-                    
-                    // 공격한 유저(나)
-                    var attackUser = player.Stat.NickName;
+                        if (hitPlayerList.Contains(hitPlayer))
+                            continue;
 
-                    // 공격 당한 유저
-                    var attackedUser = hitPlayer.Stat.NickName;
-
-                    // 공격 데미지
-                    var attackDamage = player.Stat.AttackDamage;
-
-                    // 피격 유저에게 RPC를 전송함
-                    hitPlayer.photonView.RPC("AttackRPC", PhotonTargets.Others, attackUser, attackedUser, attackDamage);
+                        hitPlayerList.Add(hitPlayer);
+                    }
                 }
+            }
+
+            for(int i = 0; i < hitPlayerList.Count; i++)
+            {
+                var hitPlayer = hitPlayerList[i];
+
+                var player = StageScene.Instance.Player;
+
+                // 공격한 유저(나)
+                var attackUser = player.Stat.NickName;
+
+                // 공격 데미지
+                var attackDamage = player.Stat.AttackDamage;
+
+                // 피격 유저에게 RPC를 전송함
+                hitPlayer.photonView.RPC("AttackRPC", PhotonTargets.Others, attackUser, hitPlayer.Stat.NickName, attackDamage);
             }
         }
 

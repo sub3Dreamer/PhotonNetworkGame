@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResourceLoad : MonoBehaviour
+namespace PUNGame
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ResourceLoad 
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public static T Load<T>(string fileName) where T : Object
+        {
+            return Resources.Load<T>(fileName);
+        }
     }
 }

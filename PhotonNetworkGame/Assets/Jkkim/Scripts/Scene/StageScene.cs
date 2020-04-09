@@ -81,7 +81,7 @@ namespace PUNGame
         public void Init()
         {
             _playerCamera = StageCameraController.Instance.PlayerCamera;
-            _joystick = PlayerUIController.Instance.Joystick;
+            _joystick = StageSceneUI.Instance.Joystick;
         }
 
         public void CreatePlayer()
@@ -89,7 +89,7 @@ namespace PUNGame
             /// <summary>
             /// Resources 폴더에 있는 프리팹 이름으로 찾는 방식이라 중복될 경우 에러 발생함
             /// </summary>
-            GameObject player = PhotonNetwork.Instantiate(PLAYER_RESOURCE_NAME, SpawnPosition, Quaternion.identity, 0);
+            GameObject player = PhotonNetwork.Instantiate(GameManager.Instance.LoginData.PlayerResourceName, SpawnPosition, Quaternion.identity, 0);
             _playerCamera.Follow = player.transform;
             _playerCamera.LookAt = player.transform;
 
@@ -98,7 +98,7 @@ namespace PUNGame
             _player = player.GetComponent<Player>();
             _player.Init(GameManager.Instance.LoginData.PlayerData);
 
-            PlayerUIController.Instance.Init();
+            StageSceneUI.Instance.SetNickName();
         }
         
         public void AddOtherPlayer(int photonViewID, Player player)

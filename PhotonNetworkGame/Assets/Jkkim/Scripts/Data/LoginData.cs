@@ -6,11 +6,13 @@ namespace PUNGame
 {
     public class LoginData
     {
+        public string PlayerResourceName;
         public PlayerData PlayerData;
 
-        public LoginData()
+        public LoginData(string playerResourceName, PlayerData playerData)
         {
-
+            PlayerResourceName = playerResourceName;
+            PlayerData = playerData;
         }
     }
 }

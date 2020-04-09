@@ -1,34 +1,31 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace PUNGame
 {
     public class LoginScene : MonoBehaviour
     {
-        [SerializeField] InputField _nickNameField;
+        [SerializeField] LoginSceneUI _loginUI;
 
-        LoginData _data;
+        static LoginScene _instance;
 
-        void CreateData()
+        public static LoginScene Instance
         {
-            _data = new LoginData();
-            var playerData = new PlayerData();
-            playerData.NickName = _nickNameField.text.Trim();
-            playerData.CurrentHp = 50;
-            playerData.MaxHp = 50;
-            playerData.AttackDamage = 5;
-
-            _data.PlayerData = playerData;
+            get
+            {
+                return _instance;
+            }   
+        }
+        
+        private void Awake()
+        {
+            _instance = this;
         }
 
-        #region Button Event
-        public void OnClickStart()
+        public void Login(LoginData loginData)
         {
-            CreateData();
-            GameManager.Instance.LoadStageScene(_data);
+            GameManager.Instance.LoadStageScene(loginData);
         }
-        #endregion
     }
 }

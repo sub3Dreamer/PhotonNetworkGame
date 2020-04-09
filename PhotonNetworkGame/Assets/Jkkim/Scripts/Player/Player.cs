@@ -33,21 +33,16 @@ namespace PUNGame
 
             if (stream.isWriting)
             {
-                // Class타입은 Serialize가 안됨
-                //stream.SendNext(_data);
-
                 stream.SendNext(playerStat.NickName);
                 stream.SendNext(playerStat.CurrentHp);
                 stream.SendNext(playerStat.MaxHp);
                 stream.SendNext(playerStat.AttackDamage);
 
                 // 내 Hp 게이지 갱신
-                PlayerUIController.Instance.SetHp(playerStat.CurrentHp, playerStat.MaxHp);
+                StageSceneUI.Instance.SetHp(playerStat.CurrentHp, playerStat.MaxHp);
             }
             else
             {
-                //_data = (PlayerData)stream.ReceiveNext();
-
                 playerStat.NickName = (string)stream.ReceiveNext();
                 playerStat.CurrentHp = (int)stream.ReceiveNext();
                 playerStat.MaxHp = (int)stream.ReceiveNext();
@@ -60,11 +55,18 @@ namespace PUNGame
 
         #endregion
 
+        void Start()
+        {
+            _hpGauge.gameObject.SetActive(false);
+        }
+
         #region Public Method
         public void Init(PlayerData playerData)
         {
             _stat.SetData(playerData);
-            _hpGauge.gameObject.SetActive(!photonView.isMine);
+
+            if(photonView.isMine == false)
+                _hpGauge.gameObject.SetActive(true);
         }
 
         public void OnAttack()
