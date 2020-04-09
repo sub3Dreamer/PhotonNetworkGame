@@ -40,6 +40,7 @@ namespace PUNGame
 
                 // 내 Hp 게이지 갱신
                 StageSceneUI.Instance.SetHp(playerStat.CurrentHp, playerStat.MaxHp);
+                _hpGauge.gameObject.SetActive(false);
             }
             else
             {
@@ -47,8 +48,9 @@ namespace PUNGame
                 playerStat.CurrentHp = (int)stream.ReceiveNext();
                 playerStat.MaxHp = (int)stream.ReceiveNext();
                 playerStat.AttackDamage = (int)stream.ReceiveNext();
-                
+
                 // 피격 유저 Hp 갱신
+                _hpGauge.gameObject.SetActive(true);
                 _hpGauge.SetGauge(playerStat.CurrentHp, playerStat.MaxHp);
             }
         }
@@ -64,9 +66,6 @@ namespace PUNGame
         public void Init(PlayerData playerData)
         {
             _stat.SetData(playerData);
-
-            if(photonView.isMine == false)
-                _hpGauge.gameObject.SetActive(true);
         }
 
         public void OnAttack()
