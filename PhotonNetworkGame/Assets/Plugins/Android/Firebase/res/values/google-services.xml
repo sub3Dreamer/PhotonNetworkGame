@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id">
+  <string name="firebase_database_url" translatable="false">https://pungame-7f848.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">891027241117</string>
+  <string name="google_storage_bucket" translatable="false">pungame-7f848.appspot.com</string>
+  <string name="project_id" translatable="false">pungame-7f848</string>
+  <string name="google_api_key" translatable="false">AIzaSyASnQl6ournpaYqhES4PvhgsUmUAke2K6A</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyASnQl6ournpaYqhES4PvhgsUmUAke2K6A</string>
+  <string name="google_app_id" translatable="false">1:891027241117:android:cc85e0ad07904481453c74</string>
+  <string name="default_web_client_id" translatable="false">891027241117-mqbtth2tvf72dr79765d0f06io38gq45.apps.googleusercontent.com</string>
+</resources>

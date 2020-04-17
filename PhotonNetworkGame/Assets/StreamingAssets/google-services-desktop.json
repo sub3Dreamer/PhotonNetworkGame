@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "891027241117",
+    "firebase_url": "https://pungame-7f848.firebaseio.com",
+    "project_id": "pungame-7f848",
+    "storage_bucket": "pungame-7f848.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:891027241117:android:cc85e0ad07904481453c74",
+        "android_client_info": {
+          "package_name": "com.Jkkim.PhotonNetworkGame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "891027241117-mqbtth2tvf72dr79765d0f06io38gq45.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASnQl6ournpaYqhES4PvhgsUmUAke2K6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "891027241117-mqbtth2tvf72dr79765d0f06io38gq45.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
