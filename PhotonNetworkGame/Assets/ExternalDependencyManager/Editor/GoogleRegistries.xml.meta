@@ -4,12 +4,10 @@ labels:
 - gumpr_registries
 - gvh
 - gvh_version-1.2.144
-- gvh_version-6.13.0
 - gvhp_exportpath-Assets/ExternalDependencyManager/Editor/GoogleRegistries.xml
-- gvhp_exportpath-ExternalDependencyManager/Editor/GoogleRegistries.xml
-timeCreated: 1583806049
-licenseType: Pro
+- gvhp_exportpath-Assets\ExternalDependencyManager\Editor\GoogleRegistries.xml
 TextScriptImporter:
-  userData:
-  assetBundleName:
-  assetBundleVariant:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
